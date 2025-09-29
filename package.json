@@ -1,8 +1,8 @@
 {
   "name": "@nazar-pasha/automation-lib",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Library for automation steps with Azure integration",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/NazarPashazade/automation-lib.git"
