@@ -61,7 +61,7 @@ Purpose:
 
 - Usage
 
-  ```js
+  ```ts
   const { executeStep } = require("@nazar-pasha/automation-lib");
 
   await executeStep({
