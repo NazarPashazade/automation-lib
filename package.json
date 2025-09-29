@@ -1,0 +1,30 @@
+{
+  "name": "@internal/automation-lib",
+  "version": "1.0.0",
+  "description": "Library for automation steps with Azure integration",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NazarPashazade/automation-lib.git"
+  },
+  "homepage": "https://github.com/NazarPashazade/automation-lib#readme",
+  "scripts": {},
+  "keywords": [
+    "azure service bus",
+    "azure storage account"
+  ],
+  "author": "Nazar Pashazade <pashazade.nazar@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "execute-step.js",
+    "config",
+    "service-bus.js",
+    "storage.js"
+  ],
+  "dependencies": {
+    "@azure/service-bus": "^7.9.5",
+    "@azure/storage-blob": "^12.28.0",
+    "dotenv": "^17.2.2"
+  }
+}
