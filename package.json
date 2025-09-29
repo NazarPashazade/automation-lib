@@ -1,5 +1,5 @@
 {
-  "name": "@internal/automation-lib",
+  "name": "@nazar-pasha/automation-lib",
   "version": "1.0.0",
   "description": "Library for automation steps with Azure integration",
   "main": "index.js",
