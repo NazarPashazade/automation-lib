@@ -6,13 +6,17 @@ async function sendToServiceBus(log) {
   const { SERVICE_BUS_CONNECTION_STRING, SERVICE_BUS_QUEUE_NAME } = getConfig();
 
   const body = {
+    storyboardId: log.storyboardId,
     stepName: log.stepName,
+    sourceURL: log.sourceURL,
     selector: log.selector,
     failureReason: log.failureReason,
-    expectedOutcome: log.expectedOutcome,
     lastPassedSnapshotURL: log.lastPassedSnapshotURL,
     failureSnapshotURL: log.failureSnapshotURL,
+    failedCodeSnippet: log.failedCodeSnippet,
   };
+
+  console.log({ body });
 
   const sbClient = new ServiceBusClient(SERVICE_BUS_CONNECTION_STRING);
   const sender = sbClient.createSender(SERVICE_BUS_QUEUE_NAME);

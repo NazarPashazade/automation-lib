@@ -15,21 +15,28 @@ async function executeStep({
   storyboardId,
 }) {
   const log = {
+    storyboardId,
     stepName,
-    checkpointType: selector ? "action" : "navigation",
     selector,
     sourceURL: page.url(),
-    expectedOutcome: "element visible and intractable",
     status: "pending",
     failureReason: null,
     lastPassedSnapshotURL: null,
     failureSnapshotURL: null,
-    // failureScreenshotFileURL: null,
     timestamp: new Date().toISOString(),
+    failedCodeSnippet: "",
     additionalInfo,
   };
 
   const safeStepName = stepName.replace(/\s+/g, "_");
+
+  try {
+    const fnString = actionFn.toString();
+    const bodyMatch = fnString.match(/{([\s\S]*)}/);
+    log.failedCodeSnippet = bodyMatch ? bodyMatch[1].trim() : fnString;
+  } catch (_) {
+    log.failedCodeSnippet = "Unable to capture code snippet.";
+  }
 
   try {
     if (expectNavigation) {
@@ -68,7 +75,7 @@ async function executeStep({
     throw new Error(`Step failed: ${stepName} - ${log.failureReason}`);
   }
 
-  console.log(JSON.stringify(log, null, 2));
+  console.log(log);
   return log;
 }
 

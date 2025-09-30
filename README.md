@@ -1,6 +1,6 @@
 ## 🔹 Usage
 
-🔹 Functions Overview
+Functions Overview
 
 #### Library exposes three key functions:
 
@@ -12,7 +12,7 @@
 
 ---
 
-### 1️⃣ init(config): Required Setup
+### 🔹 init(config): Required Setup
 
 Purpose:
 
@@ -39,7 +39,7 @@ Purpose:
 
 ---
 
-### 1️⃣ executeStep(options)
+### 🔹 executeStep(options)
 
 Purpose:
 
@@ -76,3 +76,20 @@ Purpose:
     },
   });
   ```
+
+## Azure Service Bus Input
+
+Here is an example of a json object passed to Azure Service Bus in case failure
+
+```json
+{
+  "storyboardId": "123e9078975b098094567e89b",
+  "stepName": "Click Anwendungen",
+  "sourceURL": "https://example.com/login",
+  "selector": "/html/body/div[2]/div[2]/div[3]/a",
+  "failureReason": "waiting for XPath `/html/body/div[2]/a` failed: timeout 30000ms exceeded",
+  "lastPassedSnapshotURL": "https://example.com/snapshots/LastPassedSnapshot.html",
+  "failureSnapshotURL": "https://example.com/snapshots/FailureSnapshot.html",
+  "failedCodeSnippet": "const el = await page.waitForXPath(selectors.portalView.anwendungen);\nawait el.click();"
+}
+```
