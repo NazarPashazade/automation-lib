@@ -9,10 +9,11 @@ async function executeStep({
   stepName,
   page,
   actionFn,
+  storyboardId,
   selector = null,
   additionalInfo = {},
   expectNavigation = false,
-  storyboardId,
+  onError = null,
 }) {
   const log = {
     storyboardId,
@@ -70,9 +71,12 @@ async function executeStep({
       safeStepName
     );
 
-    await sendToServiceBus(log);
-
-    throw new Error(`Step failed: ${stepName} - ${log.failureReason}`);
+    if (typeof onError === "function") {
+      await onError(err, log);
+    } else {
+      await sendToServiceBus(log);
+      throw new Error(`Step failed: ${stepName} - ${log.failureReason}`);
+    }
   }
 
   console.log(log);

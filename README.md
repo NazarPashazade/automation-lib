@@ -78,6 +78,38 @@ await executeStep({
 });
 ```
 
+## 🔹 Customize Error Handling with executeStep
+
+Provide an onError callback when calling executeStep to override the default error handling logic.
+
+- Before: Any step failure automatically sent logs to Azure Service Bus and threw an error.
+
+- Now: The client can handle errors in a custom way, while still keeping the default behavior as fallback
+
+Example:
+
+```js
+await executeStep({
+  storyboardId: STORYBOARD_ID,
+  stepName: "Login - Enter Username",
+  page,
+  actionFn: async () => {
+    const el = await page.waitForSelector(selectors.homepage.email); // should be username
+    await el.type(credentials.userName, { delay: 125 });
+  },
+  onError: (err, log) => {
+    console.error("Custom Error handler:", err.message);
+    throw err;
+  },
+});
+```
+
+Output:
+
+```json
+Custom Error handler: waiting for selector `#email` failed: timeout 30000ms exceeded
+```
+
 ## Azure Service Bus Input
 
 Here is an example of a json object passed to Azure Service Bus in case failure
