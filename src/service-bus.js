@@ -14,6 +14,7 @@ async function sendToServiceBus(log) {
     lastPassedSnapshotURL: log.lastPassedSnapshotURL,
     failureSnapshotURL: log.failureSnapshotURL,
     failedCodeSnippet: log.failedCodeSnippet,
+    additionalInfo: log.additionalInfo,
   };
 
   console.log({ body });
