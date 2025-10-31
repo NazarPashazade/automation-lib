@@ -5,6 +5,16 @@ const {
   fetchLastPassedSnapshotURL,
 } = require("./storage");
 
+const addFailedCodeSnapshot = (log, actionFn) => {
+  try {
+    const fnString = actionFn.toString();
+    const bodyMatch = fnString.match(/{([\s\S]*)}/);
+    log.failedCodeSnippet = bodyMatch ? bodyMatch[1].trim() : fnString;
+  } catch (_) {
+    log.failedCodeSnippet = "Unable to capture code snippet.";
+  }
+};
+
 async function executeStep({
   stepName,
   page,
@@ -32,14 +42,6 @@ async function executeStep({
   const safeStepName = stepName.replace(/\s+/g, "_");
 
   try {
-    const fnString = actionFn.toString();
-    const bodyMatch = fnString.match(/{([\s\S]*)}/);
-    log.failedCodeSnippet = bodyMatch ? bodyMatch[1].trim() : fnString;
-  } catch (_) {
-    log.failedCodeSnippet = "Unable to capture code snippet.";
-  }
-
-  try {
     if (expectNavigation) {
       await Promise.all([
         actionFn(),
@@ -57,6 +59,8 @@ async function executeStep({
       safeStepName
     );
   } catch (err) {
+    addFailedCodeSnapshot(log, actionFn);
+
     log.status = "FAILED";
     log.failureReason = err.message;
 

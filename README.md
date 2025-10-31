@@ -48,15 +48,16 @@ Purpose:
 
 Parameters (all in a single object):
 
-```js
+```ts
 interface ExecuteStepOptions {
   stepName: string; // Name of the step for logging
   page: any; // Puppeteer page object
+  storyboardId: string; // Id of the storyboard
   actionFn: Function; // Async function that performs the action (click, type, navigate)
+  onError?: Function; // Optional custom error handler
   selector?: string; // CSS selector for reference in logs
   additionalInfo?: object; // Optional metadata
   expectNavigation?: boolean; // Set true if step triggers page navigation
-  storyboardId: string;
 }
 ```
 

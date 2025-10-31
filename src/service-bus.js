@@ -17,7 +17,7 @@ async function sendToServiceBus(log) {
     additionalInfo: log.additionalInfo,
   };
 
-  console.log({ body });
+  console.log(body);
 
   const sbClient = new ServiceBusClient(SERVICE_BUS_CONNECTION_STRING);
   const sender = sbClient.createSender(SERVICE_BUS_QUEUE_NAME);
