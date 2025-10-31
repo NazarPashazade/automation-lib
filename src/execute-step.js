@@ -30,7 +30,7 @@ async function executeStep({
     stepName,
     selector,
     sourceURL: page.url(),
-    status: "pending",
+    status: "PENDING",
     failureReason: null,
     lastPassedSnapshotURL: null,
     failureSnapshotURL: null,
